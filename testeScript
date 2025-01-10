@@ -1,0 +1,28 @@
+document.addEventListener('DOMContentLoaded', () => {
+    const tabelaUsuarios = document.getElementById('tabela-usuarios');
+
+    // Listar usuários
+    fetch('listar.php')
+        .then(response => response.json())
+        .then(usuarios => {
+            usuarios.forEach(usuario => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${usuario.id}</td>
+                    <td>${usuario.nome}</td>
+                    <td>${usuario.email}</td>
+                    <td>
+                        <button onclick="excluirUsuario(${usuario.id})">Excluir</button>
+                    </td>
+                `;
+                tabelaUsuarios.appendChild(tr);
+            });
+        });
+});
+
+// Excluir usuário
+function excluirUsuario(id) {
+    fetch(`excluir.php?id=${id}`)
+        .then(() => location.reload())
+        .catch(err => console.error(err));
+}

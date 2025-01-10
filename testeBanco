@@ -1,0 +1,36 @@
+-- Criação do banco de dados
+CREATE DATABASE IF NOT EXISTS sistema_usuarios;
+
+-- Seleciona o banco de dados
+USE sistema_usuarios;
+
+-- Criação da tabela `usuarios`
+CREATE TABLE IF NOT EXISTS usuarios (
+    id INT AUTO_INCREMENT PRIMARY KEY, -- Chave primária com incremento automático
+    nome VARCHAR(100) NOT NULL,        -- Nome do usuário
+    email VARCHAR(100) NOT NULL UNIQUE, -- Email único
+    senha VARCHAR(255) NOT NULL,       -- Senha do usuário (criptografada)
+    data_criacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP -- Data de criação do registro
+);
+
+-- Inserção de registros de exemplo
+INSERT INTO usuarios (nome, email, senha)
+VALUES 
+('João Silva', 'joao.silva@example.com', 'senha123'),
+('Maria Oliveira', 'maria.oliveira@example.com', 'senha456');
+
+-- Atualização de um registro (Exemplo)
+UPDATE usuarios
+SET nome = 'João Santos', email = 'joao.santos@example.com'
+WHERE id = 1;
+
+-- Exclusão de um registro (Exemplo)
+DELETE FROM usuarios
+WHERE id = 2;
+
+-- Consulta para listar todos os usuários
+SELECT * FROM usuarios;
+
+-- Consulta específica (Exemplo: buscar por email)
+SELECT * FROM usuarios
+WHERE email = 'joao.santos@example.com';
